@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maui_InventoryManagementSystem.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+             
+            <!--Add/Edit Product-->
+            <Entry x:Name="NameEntry" Placeholder="Product Name"/>
+            <Entry x:Name="CategoryEntry" Placeholder="Category"/>
+            <Entry x:Name="PriceEntry" Placeholder="Price" Keyboard="Numeric"/>
+            <Entry x:Name="StockEntry" Placeholder="Stock" Keyboard="Numeric"/>
+
+            <Button Text="Add Product" Clicked="OnAddProductClicked"/>
+            <Button Text="Update Product" Clicked="OnUpdateProductClicked"/>
+            
+            <!--Search-->
+            <Entry x:Name="SearchProduct" Placeholder="Search Products" TextChanged ="OnSearchProductTextChanged"/>
+
+            <!--List Product-->
+            <ListView x:Name="ProductListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="{Binding Name}"/>
+                                <Label Text="{Binding Category}"/>
+                                <Label Text="{Binding Price, StringFormat='${0}'}"/>
+                                <Label Text="{Binding Stock, StringFormat='Stock:{0}'}"/>
+                                <Button Text="✏️" Clicked="OnEditProductClicked" CommandParameter="{Binding .}"/>
+                                <Button Text="🗑️" Clicked="OnDeleteProductClicked" CommandParameter="{Binding .}"/>
+
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
